@@ -4,6 +4,7 @@
 
 import data_repo_client
 import google.auth
+from google.cloud import bigquery
 
 # Not sure which version Nate was using, but I had to specifically import the 
 # transport.requests to get the code below to work. 
@@ -35,6 +36,7 @@ def extract_table_schenas(object_type, object_id_list, output_path):
     if object_type in ["dataset", "snapshot"]:
         print(f"Start time: {datetime.datetime.now()}")
         schema_results = []
+        queryItems = []
          # Loop through and process listed objects
         for object_id in object_id_list:
 
@@ -54,49 +56,15 @@ def extract_table_schenas(object_type, object_id_list, output_path):
                     object_details = snapshots_api.retrieve_snapshot(id=object_id).to_dict()
                     object_name = object_details["name"]
                     object_schema = object_details["tables"]
-                    for table in object_schema:
-                        if table["name"] == "family":
-                            print(table["columns"])
+                    object_project = object_details["data_project"]
+                    queryItems.append({"table_name": object_schema,"dataset_name":object_name,"data_project":object_project})
 
-                    #pdb.set_trace()
-                    # the tables above will return a list of tables. We will 
-                    # need to capture each of the tables along with the column
-                    # information (each table row will have an array of columns)
-                    # I'm seeing the following properties for these:
-                    #  * name
-                    #  * datatype
-                    #  * array_of (boolean)
-                    #  * required (boolean)
             except Exception as e:
                 print(f"Error retrieving object from TDR: {str(e)}")
                 print("Continuing to next object.")
                 continue
-            
-            # Parse and record schema details
-            for table in object_schema:
-                table_name = table["name"]
-                if filter_out_fss_tables and "anvil_" in table_name:
-                    continue
-                else:
-                    for column in table["columns"]:
-                        column_name = column["name"]
-                        schema_results.append([object_type, object_id, object_name, table_name, column_name])
-            
-        # Format and write out results
-        df_results = pd.DataFrame(schema_results, columns=["object_type", "object_id", "object_name", "table_name", "column_name"])
-        df_sorted = df_results.sort_values(["object_name", "table_name", "column_name"], ascending=[True, True, True], ignore_index=True)
-        results_file = "schema_extract.tsv"
-        df_sorted.to_csv(results_file, index=False, sep="\t")
-
-        # Not sure, but these aren't working. I suspect this is from a notebook. 
-        # We will want to move these out to the output path, but we should be
-        # able to use the os.system command or subprocess or something and then
-        # just regular pathlib or whatever to delete/unlink the file. 
-        # !gsutil cp $results_file $output_path 2> stdout
-        # !rm $results_file
-        print(f"Results copied to: {output_path}")
-        print(f"End time: {datetime.datetime.now()}")    
-                 
+            print(queryItems,"queryItems","\n")
+                             
     else:
         print("Invalid object_type provided. Please specified 'dataset' or 'snapshot' and try again.")
     

@@ -1,0 +1,553 @@
+[
+  {
+    "datasetId": 287,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000234",
+    "deletable": false,
+    "datasetName": "ANVIL_ALS_FTD_DEMENTIA_SEQ_GRU_v1 (GRU)",
+    "participantCount": 675,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "GRU",
+          "description": "Data is available for general research use."
+        }
+      ],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/85b0b351-cd0a-4efe-95a4-e39273c42831",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "Lewy body dementia, amyotrophic lateral sclerosis/frontotemporal dementia, and multiple system atrophy are age-related, neurodegenerative syndromes that are poorly understood. Delineating the genetic risk that is driving the pathophysiology of these neurological diseases is fundamental for understanding disease mechanisms and for developing disease-modifying treatments.\n\n\n\n In version 1 of the study/dbGaP deposition, we performed a whole-genome sequencing study consisting of 7,403 total samples, including 2,633 genomes from patients with Lewy body dementia, 2,641 frontotemporal dementia patients, and 1,980 neurologically healthy controls. Of these, 6,907 were uploaded to dbGaP as the basis of the DementiaSeq, phs001963 dataset. The data relating to these samples are available on dbGaP.\n\n\n\n In version 2 of this study/dbGaP deposition, we made much of these data available on Anvil. More specifically, data for 6,254 of these samples were also uploaded to the ALS Compute platform on AnVIL. The data for the remaining 653 samples are only available on dbGaP. The dbGaP/AnVIL Table lists the availability of dbGaP and AnVIL for each individual sample: phd008475.\n\nIn version 3 of the study/dbGaP deposition, we added whole-genome sequence data generated using DNA samples obtained from 683 patients diagnosed with multiple system atrophy.\n Platform: AnVIL",
+      "studyName": "DEMENTIA-SEQ: WGS in Lewy Body Dementia and Frontotemporal Dementia (phs001963)",
+      "studyId": 69,
+      "phsId": "phs001963",
+      "phenotype": "ALS, ALS-FTD, Lewy Body Dementia, FTD",
+      "species": "Human",
+      "piName": "Bryan J. Traynor, M.D, PhD",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Whole genome sequencing data",
+        "clinical phenotypes",
+        "raw data not harmonized but available on dbGaP",
+        "phs001963.v2.p1"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 353,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000300",
+    "deletable": false,
+    "datasetName": "ANVIL_CMG_BaylorHopkins_HMB_NPU_WES (HMB-NPU)",
+    "participantCount": 819,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "HMB",
+          "description": "Data is limited for health/medical/biomedical research."
+        }
+      ],
+      "secondary": [
+        {
+          "code": "NCU",
+          "description": "Commercial use prohibited."
+        }
+      ]
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/07b0243c-48fc-4eee-a338-c7571cc2df1a",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments.\n Platform: AnVIL",
+      "studyName": "Baylor Hopkins Center for Mendelian Genomics (BH CMG) (phs000711)",
+      "studyId": 96,
+      "phsId": "phs000711",
+      "phenotype": "Mendelian disorders",
+      "species": "Human",
+      "piName": "NA",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Raw Sequencing data"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 354,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000301",
+    "deletable": false,
+    "datasetName": "ANVIL_CMG_Broad_Brain_NeuroDev_WES (GRU-IRB)",
+    "participantCount": 296,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "GRU",
+          "description": "Data is available for general research use."
+        }
+      ],
+      "secondary": [
+        {
+          "code": "IRB",
+          "description": "Local ethics committee approval is required."
+        }
+      ]
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/94f79040-68f5-4801-bf41-6f29bc0be8c6",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments. \n Platform: AnVIL",
+      "studyName": "Broad Institute Center for Mendelian Genomics (phs001272)",
+      "studyId": 46,
+      "phsId": "phs001272",
+      "phenotype": "Mendelian disorders",
+      "species": "Human",
+      "piName": "O'Donnell-Luria, Anne",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Raw Sequencing data"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 543,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000489",
+    "deletable": true,
+    "datasetName": "ANVIL_CCDG_Broad_CVD_AF_GAPP_DS_MDS_WES (DC-DCCA-NPU-MDS)",
+    "participantCount": 1,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "OTHER",
+          "description": "Other restrictions: DC-DCCA-NPU-MDS."
+        }
+      ],
+      "secondary": [
+        {
+          "code": "NCU",
+          "description": "Commercial use prohibited."
+        }
+      ]
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/753d9871-495a-4cab-944a-e925ec269282",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "This study is a part of NHGRI's Center for Common Disease Genomics, which is a collaborative large-scale genome sequencing effort to comprehensively identify rare risk and protective variants contributing to multiple common disease phenotypes. Current estimates anticipate that the CCDG program will sequence approximately 140K whole genomes and 225K whole exomes during the life of the project.\n Platform: AnVIL",
+      "studyName": "Center for Common Disease Genomics [CCDG] - Cardiovascular: Genetic and Phenotypic Determinants of Blood Pressure and Other Cardiovascular Risk Factors (phs002236)",
+      "studyId": 127,
+      "phsId": "phs002236",
+      "phenotype": "Atrial Fibrillation",
+      "species": "Human",
+      "piName": "Patrick Ellinor, MD, PhD",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Unknown"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 4381,
+      "displayName": "Barbara Thomas"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 431,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000378",
+    "deletable": false,
+    "datasetName": "ANVIL_CCDG_WashU_CVD_EOCAD_WashU_CAD_GRU_IRB_WGS (GRU-IRB)",
+    "participantCount": 326,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "GRU",
+          "description": "Data is available for general research use."
+        }
+      ],
+      "secondary": [
+        {
+          "code": "IRB",
+          "description": "Local ethics committee approval is required."
+        }
+      ]
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/16f70694-0e7f-40dc-b012-7ce9ca51fcdb",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The genetic basis of coronary artery disease in individuals of non-European ancestry is largely unknown. The Washington University Coronary Artery Disease Study (WUCADS) recruited participants of non-European ancestry with and without coronary artery disease to address this question. Whole genome sequencing in WUCADS was performed at the McDonnell Genome Institute at Washington University. \n Platform: AnVIL",
+      "studyName": "Washington University Coronary Artery Disease Study (phs001227)",
+      "studyId": 81,
+      "phsId": "phs001227",
+      "phenotype": "atherosclerosis",
+      "species": "Human",
+      "piName": "Nathan O. Stitziel, MD, PhD",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Raw Sequencing data"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 550,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000496",
+    "deletable": true,
+    "datasetName": "ANVIL_CMG_UWASH_DS_BDIS (DS-BDIS)",
+    "participantCount": 1,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "DS",
+          "description": "Data use is limited for studying: brain disease"
+        }
+      ],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/4312ca34-388a-4d28-baa3-b64ec6eaf7af",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments.\n Platform: AnVIL",
+      "studyName": "University of Washington Center for Mendelian Genomics (UW-CMG) (phs000693)",
+      "studyId": 79,
+      "phsId": "phs000693",
+      "phenotype": "Rare Diseases",
+      "species": "Human",
+      "piName": "Wei, Chia-Lin",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Unknown"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 4381,
+      "displayName": "Barbara Thomas"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 557,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000503",
+    "deletable": true,
+    "datasetName": "ANVIL_CMG_UWash_GRU (GRU)",
+    "participantCount": 1,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "GRU",
+          "description": "Data is available for general research use."
+        }
+      ],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/db0c9cff-f3f9-4315-addb-6b6c9088b124",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments.\n Platform: AnVIL",
+      "studyName": "University of Washington Center for Mendelian Genomics (UW-CMG) (phs000693)",
+      "studyId": 79,
+      "phsId": "phs000693",
+      "phenotype": "Rare Diseases",
+      "species": "Human",
+      "piName": "Wei, Chia-Lin",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Unknown"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 4381,
+      "displayName": "Barbara Thomas"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 551,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000497",
+    "deletable": true,
+    "datasetName": "ANVIL_CMG_UWASH_DS_HFA (DS-HFA)",
+    "participantCount": 1,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "OTHER",
+          "description": "Other restrictions: DS-HFA."
+        }
+      ],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/98a13ebb-0a91-427e-bdd5-8f5833036d81",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments.\n Platform: AnVIL",
+      "studyName": "University of Washington Center for Mendelian Genomics (UW-CMG) (phs000693)",
+      "studyId": 79,
+      "phsId": "phs000693",
+      "phenotype": "Rare Diseases",
+      "species": "Human",
+      "piName": "Wei, Chia-Lin",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Unknown"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 4381,
+      "displayName": "Barbara Thomas"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  },
+  {
+    "datasetId": 296,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000243",
+    "deletable": false,
+    "datasetName": "ANVIL_NIA_CARD_Coriell_Cell_Lines_Open (NRES)",
+    "participantCount": 3,
+    "dataUse": {
+      "primary": [],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/1c6223bf-9665-4b54-bbc3-40847ebaf92c",
+    "accessManagement": "open",
+    "study": {
+      "description": "Here we report and share Oxford Nanopore Technologies (ONT) data from three widely used lymphobastoid cell lines (LCLs) (HG002, HG02723 and HG00733) obtained from Coriell ([https://www.coriell.org/](https://www.coriell.org/)). This data was generated during optimizing the ONT sequencing protocol for the long-read sequencing efforts of the NIH Intramural Center for Alzheimer's and Related Dementias (CARD, [https://card.nih.gov/](https://card.nih.gov/)). The overall aim is to generate high quality long-read data with N50s of ~30kb resulting in >30X coverage. For more information see [ANVIL_NIA_CARD_Coriell_Cell_Lines_Open](https://anvil.terra.bio/#workspaces/anvil-datastorage/ANVIL_NIA_CARD_Coriell_Cell_Lines_Open)\n Platform: AnVIL",
+      "studyName": "NIA CARD Coriell Cell Lines (phs003224)",
+      "studyId": 75,
+      "phsId": "phs003224",
+      "phenotype": "No phenotype data present.",
+      "species": "Human",
+      "piName": "Cornelis Blauwendraat",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Long-read Oxford Nanopore genome DNA sequencing"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    }
+  },
+  {
+    "datasetId": 555,
+    "createUserId": 6715,
+    "createUserDisplayName": "Nathan Calvanese",
+    "datasetIdentifier": "DUOS-000501",
+    "deletable": true,
+    "datasetName": "ANVIL_CMG_UWash_DS_CHDEF (DS-CHDEF)",
+    "participantCount": 1,
+    "dataUse": {
+      "primary": [
+        {
+          "code": "OTHER",
+          "description": "Other restrictions: DS-CHDEF."
+        }
+      ],
+      "secondary": []
+    },
+    "dataLocation": "TDR Location",
+    "url": "https://data.terra.bio/snapshots/10e413c2-729c-4802-a387-6763a7798d8f",
+    "dacId": 2,
+    "dacApproval": true,
+    "accessManagement": "controlled",
+    "study": {
+      "description": "The Centers for Mendelian Genomics project uses next-generation sequencing and computational approaches to discover the genes and variants that underlie Mendelian conditions. By discovering genes that cause Mendelian conditions, we will expand our understanding of their biology to facilitate diagnosis and new treatments.\n Platform: AnVIL",
+      "studyName": "University of Washington Center for Mendelian Genomics (UW-CMG) (phs000693)",
+      "studyId": 79,
+      "phsId": "phs000693",
+      "phenotype": "Rare Diseases",
+      "species": "Human",
+      "piName": "Wei, Chia-Lin",
+      "dataSubmitterEmail": "ncalvane@broadinstitute.org",
+      "dataSubmitterId": 6715,
+      "dataCustodianEmail": [
+        "help@lists.anvilproject.org"
+      ],
+      "publicVisibility": true,
+      "dataTypes": [
+        "Unknown"
+      ]
+    },
+    "submitter": {
+      "userId": 6715,
+      "displayName": "Nathan Calvanese"
+    },
+    "updateUser": {
+      "userId": 4381,
+      "displayName": "Barbara Thomas"
+    },
+    "dac": {
+      "dacId": 2,
+      "dacName": "NHGRI DAC",
+      "dacEmail": "nhgridac@mail.nih.gov"
+    }
+  }
+]

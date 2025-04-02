@@ -8,7 +8,7 @@ from typing import List, Dict, Any
 import pandas as pd
 
 import pdb
-from ddscrape import extract_table_schenas
+# from ddscrape import extract_table_schenas
 # import datetime
 
 
@@ -34,7 +34,8 @@ def search_studies_by_title(
     matches = []
     for study in studies:
         # Adjust key references to match your actual JSON keys
-        study_title = study.get("datasetName", "")
+        study_title = study.get("study", {}).get("studyName", "")
+        print(f"Searching for '{title_query}' in '{study_title}'")
         if pattern.search(study_title):
             matches.append(study)
     return matches
@@ -128,6 +129,11 @@ def main(index_file_path: str, user_query: str):
         print(f"Dataset Name: {r['basic_info']['dataset_name']}")
         print(f"TDR ID: {r['basic_info']['tdr_id']}")
         print(f"dbGaP ID: {r['basic_info']['phs_id']}")
+        print(f"access management: {r['basic_info']['access_management']}")
+        print(f"data use: {r['basic_info']['data_use']}")
+        print(f"phenotype: {r['basic_info']['phenotype']}")
+        print(f"species: {r['basic_info']['species']}")
+        print(f"piName: {r['basic_info']['pi_name']}")
         # print(f"TDR Dictionary: {r['tdr_dict']}")
         # print(f"dbGaP Dictionary: {r['dbgap_dict']}\n")
 
@@ -135,6 +141,6 @@ def main(index_file_path: str, user_query: str):
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to your DUOS index file
-    user_search_string = "ANVIL"  # or something the user typed
+    user_search_string = "WGS"  # or something the user typed
     
     main(duos_index_path, user_search_string)

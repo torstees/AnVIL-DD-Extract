@@ -4,13 +4,9 @@
 
 import data_repo_client
 import google.auth
-from google.cloud import bigquery
-
-# Not sure which version Nate was using, but I had to specifically import the 
-# transport.requests to get the code below to work. 
 import google.auth.transport.requests
-import requests
-import pandas as pd
+from google.cloud import bigquery
+import os
 import datetime
 
 import pdb
@@ -87,7 +83,11 @@ def query_dataset_tables(query_items, output_path):
             query = f"SELECT * FROM `{data_project}.{dataset_name}.{table_name}` LIMIT 10"
             try:
                 df = bq_client.query(query).to_dataframe()
-                output_file = f"{output_path}/{dataset_name}/{table_name}.csv"
+                # Create output directory if it doesn't exist
+                output_dir = f"{output_path}/{dataset_name}"
+                os.makedirs(output_dir, exist_ok=True)
+                # Save the DataFrame to a CSV file
+                output_file = f"{output_dir}/{table_name}.csv"
                 df.to_csv(output_file, index=False)
                 print(f"Query results saved to {output_file}")
             except Exception as e:

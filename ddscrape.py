@@ -111,6 +111,7 @@ def main():
     
     # Specify whether to include the schema in the results
     query_items = extract_query_items(object_type, object_id_list, output_path)
+    query_dataset_tables(query_items, output_path)
     
     
 

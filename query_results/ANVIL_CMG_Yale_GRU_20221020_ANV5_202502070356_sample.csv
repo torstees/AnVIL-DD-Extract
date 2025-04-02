@@ -1,0 +1,11 @@
+datarepo_row_id,sample_id,Participant_id,crai,cram,sample_source,sequencing_center,subject_id,ingest_provenance
+c79dd745-c636-4ab6-a043-dc896cb48991,YCMG9219-008,YCMG9219-008,drs://drs.anv0:v2_63e8a8d1-7e64-3a9f-9330-69cd447c3fb4,drs://drs.anv0:v2_5db56c0c-d244-3d99-be56-a8a760178801,,Yale,YCMG9219-008,sample_ANVIL_CMG_Yale_GRU.tsv
+286563d4-99ba-4af5-a083-b59276b2d94f,YCMG8493-002,YCMG8493-002,drs://drs.anv0:v2_0f03d191-fe37-3459-b462-7b89996a9d55,drs://drs.anv0:v2_b24883b3-7e60-3ada-8406-fb5e50b766d6,,Yale,YCMG8493-002,sample_ANVIL_CMG_Yale_GRU.tsv
+15e3c199-edf8-473a-ab57-5fbd5f6dedc4,YCMG8385-025,YCMG8385-025,drs://drs.anv0:v2_d210009a-0c57-31c2-baa5-b7a80421f2ea,drs://drs.anv0:v2_924d1451-a2f3-3f80-92c2-811a0f87eb2a,,Yale,YCMG8385-025,sample_ANVIL_CMG_Yale_GRU.tsv
+b77ecf48-7457-460f-a171-db65a55247a2,YCMG8385-017,YCMG8385-017,drs://drs.anv0:v2_088265ac-fff0-38e5-b18a-873bc3d5f00e,drs://drs.anv0:v2_523adec3-1434-3801-92de-32dbc9f1f8e3,,Yale,YCMG8385-017,sample_ANVIL_CMG_Yale_GRU.tsv
+521805d7-7340-418f-9479-bddba9e50f7f,YCMG8385-005,YCMG8385-005,drs://drs.anv0:v2_2e933ba0-cd71-3960-863a-52a5b13f4f44,drs://drs.anv0:v2_3abd57c8-05af-3c15-966e-67ec1716632a,,Yale,YCMG8385-005,sample_ANVIL_CMG_Yale_GRU.tsv
+8c02b2ec-0d69-40fb-9369-afdf36061724,YCMG9587-009,YCMG9587-009,drs://drs.anv0:v2_1f93259e-8e63-33f5-bb2e-a61f5be5427e,drs://drs.anv0:v2_977c3947-0ee3-3bc9-aa54-2eec23d78211,,Yale,YCMG9587-009,sample_ANVIL_CMG_Yale_GRU.tsv
+dd7f9c42-edaf-4790-9a50-3954a999987f,YCMG10929-017,YCMG10929-017,drs://drs.anv0:v2_bae11aa9-df18-34d1-83ae-6d2f03e42b47,drs://drs.anv0:v2_e514d7e4-b2f1-36cd-88e3-7fc524580fce,,Yale,YCMG10929-017,sample_ANVIL_CMG_Yale_GRU.tsv
+63f54571-cf99-4b42-adf6-91464c57b10d,YCMG11124-022,YCMG11124-022,drs://drs.anv0:v2_239bc3e7-ee33-3c7b-a47d-c2a227383213,drs://drs.anv0:v2_8f472259-b280-3db9-8ca4-2cd1e073f2bb,,Yale,YCMG11124-022,sample_ANVIL_CMG_Yale_GRU.tsv
+12703a76-2b13-4530-8b1d-f35b00e9d691,YCMG8755-001,YCMG8755-001,drs://drs.anv0:v2_d41e6877-ca52-31ce-a5b4-8d8d69ab49f5,drs://drs.anv0:v2_31b7a08b-4bdc-358c-bd29-ea69f6e72db2,,Yale,YCMG8755-001,sample_ANVIL_CMG_Yale_GRU.tsv
+309481c6-4485-40f0-88df-3cc9ab029ee7,YCMG9347-001,YCMG9347-001,drs://drs.anv0:v2_c05a0a32-4f01-357f-9033-a95d0375a7c9,drs://drs.anv0:v2_8fec7232-bf43-3956-9933-5d47b7fed592,,Yale,YCMG9347-001,sample_ANVIL_CMG_Yale_GRU.tsv

@@ -1,0 +1,11 @@
+datarepo_row_id,donor_id,organism_type,part_of_dataset_id,phenotypic_sex,reported_ethnicity,genetic_ancestry,source_datarepo_row_ids
+88daa8d4-b679-4803-88f8-ab2a9885dc54,3b0e2b33-441e-e643-6d75-665ea2e55dfd,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['White'],[],['subject:43c4a135-90bf-4348-8aa1-eedc1f5bab5a']
+283ee2f2-e2f4-4eae-92f4-dcd91135628b,06ed3fa9-c458-b060-6739-896531d5ba72,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['Unknown'],[],['subject:f8f94a20-e7b5-469b-99a6-712e77ba7614']
+3c6b8fd4-f0d1-4ab6-baff-8e297c4b5cd2,05526f9b-4a00-69da-02a4-cf2968ecacf2,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['Other'],[],['subject:7e6808cc-df8a-4d93-b6bd-3b50d8be720a']
+c9b064e5-2c3e-4e82-996e-20d86e717d81,53bfc970-14e1-1577-06d2-95b5447b4b0c,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['White'],[],['subject:5195270f-4d19-43b2-bba5-add0dcbb540c']
+0353c710-76b9-40aa-8174-0ebcdd12a4fb,6a0cb66e-8814-6564-6411-f8d88415aa4b,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['Other'],[],['subject:09886690-4f8b-4f46-ac92-fa89bd70735c']
+29c3822c-ea8e-485a-851d-0005442c82aa,6fc4605a-8fbb-4e22-6739-1e599f9be4fb,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['Hispanic or Latino'],[],['subject:32f5dffc-4c95-4879-b387-1483d2766ee6']
+f160c837-d8d6-48c3-bb66-757ddab52ead,f4aaf4c8-6b1f-4c08-d173-66a668b7dabf,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['White'],[],['subject:02522293-bc0d-4836-8d50-a7bd6c092046']
+547c6966-d18f-4ca8-ab46-382db7eb5814,5824d6aa-a698-0c94-4269-82c57283dea9,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['White'],[],['subject:e46825b1-a127-451e-a44b-b9b38f104db4']
+c77a65f2-9713-4c36-b18a-ec9b3b886932,69edf139-ce13-1192-db21-a4c908a8cbad,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['White'],[],['subject:2e779359-7506-4966-bccc-368f7c20939c']
+be4aa45a-74e3-4ac6-af40-6cba48f8fd82,31498d8e-3595-d611-fe33-1fdbf526bf59,Human,b9dbc574-287b-031d-6607-024e89219d81,Female,['Unknown'],[],['subject:2c4b638e-9153-45c0-a13d-567e1ce4004a']

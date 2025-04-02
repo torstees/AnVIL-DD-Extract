@@ -57,7 +57,10 @@ def extract_table_schenas(object_type, object_id_list, output_path):
                     object_name = object_details["name"]
                     object_schema = object_details["tables"]
                     object_project = object_details["data_project"]
-                    queryItems.append({"table_name": object_schema,"dataset_name":object_name,"data_project":object_project})
+                    table_names = []
+                    for table in object_schema:
+                        table_names.append(table["name"])
+                    queryItems.append({"table_names": table_names,"dataset_name":object_name,"data_project":object_project})
 
             except Exception as e:
                 print(f"Error retrieving object from TDR: {str(e)}")

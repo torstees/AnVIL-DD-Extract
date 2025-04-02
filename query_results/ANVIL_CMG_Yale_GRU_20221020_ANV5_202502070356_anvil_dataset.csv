@@ -1,2 +1,0 @@
-datarepo_row_id,dataset_id,consent_group,data_use_permission,owner,principal_investigator,registered_identifier,title,data_modality,source_datarepo_row_ids
-f6656a7c-0de8-41f8-93fe-8ccefc064303,b9dbc574-287b-031d-6607-024e89219d81,['GRU'],['GRU'],"['Richard Lifton, Murat Gunel, Shrikant Mane, Mark Gerstein']",[],['phs000744'],ANVIL_CMG_Yale_GRU,[],['workspace_attributes:ae5f1e1e-1b22-4b1b-950d-6855764bcb48']

@@ -87,7 +87,7 @@ def query_dataset_tables(query_items, output_path):
             query = f"SELECT * FROM `{data_project}.{dataset_name}.{table_name}` LIMIT 10"
             try:
                 df = bq_client.query(query).to_dataframe()
-                output_file = f"{output_path}/{dataset_name}_{table_name}.csv"
+                output_file = f"{output_path}/{dataset_name}/{table_name}.csv"
                 df.to_csv(output_file, index=False)
                 print(f"Query results saved to {output_file}")
             except Exception as e:

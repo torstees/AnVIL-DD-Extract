@@ -31,12 +31,12 @@ def refresh_tdr_api_client():
     api_client.client_side_validation = False
     return api_client
 
-def extract_table_schenas(object_type, object_id_list, output_path):
+def extract_query_items(object_type, object_id_list, output_path):
    
     if object_type in ["dataset", "snapshot"]:
         print(f"Start time: {datetime.datetime.now()}")
         schema_results = []
-        queryItems = []
+        query_items = []
          # Loop through and process listed objects
         for object_id in object_id_list:
 
@@ -60,41 +60,60 @@ def extract_table_schenas(object_type, object_id_list, output_path):
                     table_names = []
                     for table in object_schema:
                         table_names.append(table["name"])
-                    queryItems.append({"table_names": table_names,"dataset_name":object_name,"data_project":object_project})
+                    query_items.append({"table_names": table_names,"dataset_name":object_name,"data_project":object_project})
 
             except Exception as e:
                 print(f"Error retrieving object from TDR: {str(e)}")
                 print("Continuing to next object.")
                 continue
-            print(queryItems,"queryItems","\n")
+        return query_items
                              
     else:
         print("Invalid object_type provided. Please specified 'dataset' or 'snapshot' and try again.")
+
+## Function to query dataset tables with BigQuery
+def query_dataset_tables(query_items, output_path):
+    # Initialize BigQuery client
+    bq_client = bigquery.Client()
+
+    # Loop through each query item
+    for item in query_items:
+        table_names = item["table_names"]
+        dataset_name = item["dataset_name"]
+        data_project = item["data_project"]
+
+        # Loop through each table name and run a query
+        for table_name in table_names:
+            query = f"SELECT * FROM `{data_project}.{dataset_name}.{table_name}` LIMIT 10"
+            try:
+                df = bq_client.query(query).to_dataframe()
+                output_file = f"{output_path}/{dataset_name}_{table_name}.csv"
+                df.to_csv(output_file, index=False)
+                print(f"Query results saved to {output_file}")
+            except Exception as e:
+                print(f"Error querying table {table_name}: {str(e)}")
+    
+def main():
+
+    
+    # Object type (valid values are 'dataset' or 'snapshot')
+    object_type = "snapshot"
+    
+    # List objects to extract the schema from
+    object_id_list = [
+        "05a9e369-0011-48d9-ab2e-af334973bdb5"
+    ]
+    # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"
+    
+    # Specify the output GCS path for the results file
+    # output_path = "gs://fc-96e29e51-79cf-4213-a2ad-26f84a89aa25/data"
+    output_path = "./query_results"
+    
+    # Specify whether to include the schema in the results
+    query_items = extract_query_items(object_type, object_id_list, output_path)
+    
     
 
 
-#############################################
-## Input Parameters
-#############################################
-
-# Object type (valid values are 'dataset' or 'snapshot')
-object_type = "snapshot"
-
-# List objects to extract the schema from
-object_id_list = [
-    "05a9e369-0011-48d9-ab2e-af334973bdb5"
-]
-# "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"
-
-# Specify the output GCS path for the results file
-output_path = "gs://fc-96e29e51-79cf-4213-a2ad-26f84a89aa25/data"
-# output_path = "gs://fc-2a9eefc3-0302-427f-9ac3-82f078741c03/ingest_pipeline/misc/metadata_extract/schema_extract_20250204.tsv"
-
-# Specify whether FSS tables ("anvil_%") should be filtered out of the results
-filter_out_fss_tables = True
-
-#############################################
-## Execution
-#############################################
-
-extract_table_schenas(object_type, object_id_list, output_path)
+if __name__ == "__main__":
+    main()

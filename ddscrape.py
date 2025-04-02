@@ -54,7 +54,11 @@ def extract_table_schenas(object_type, object_id_list, output_path):
                     object_details = snapshots_api.retrieve_snapshot(id=object_id).to_dict()
                     object_name = object_details["name"]
                     object_schema = object_details["tables"]
-                    pdb.set_trace()
+                    for table in object_schema:
+                        if table["name"] == "family":
+                            print(table["columns"])
+
+                    #pdb.set_trace()
                     # the tables above will return a list of tables. We will 
                     # need to capture each of the tables along with the column
                     # information (each table row will have an array of columns)

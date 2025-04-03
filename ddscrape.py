@@ -8,7 +8,7 @@ import google.auth.transport.requests
 from google.cloud import bigquery
 import os
 import datetime
-
+import pandas as pd
 import pdb
 
 #############################################
@@ -31,7 +31,6 @@ def extract_query_items(object_type, object_id_list, output_path):
    
     if object_type in ["dataset", "snapshot"]:
         print(f"Start time: {datetime.datetime.now()}")
-        schema_results = []
         query_items = []
          # Loop through and process listed objects
         for object_id in object_id_list:
@@ -77,6 +76,7 @@ def query_dataset_tables(query_items, output_path):
         table_names = item["table_names"]
         dataset_name = item["dataset_name"]
         data_project = item["data_project"]
+        output_files = []
 
         # Loop through each table name and run a query
         for table_name in table_names:
@@ -90,12 +90,48 @@ def query_dataset_tables(query_items, output_path):
                 output_file = f"{output_dir}/{table_name}.csv"
                 df.to_csv(output_file, index=False)
                 print(f"Query results saved to {output_file}")
+                output_files.append(output_file)
             except Exception as e:
                 print(f"Error querying table {table_name}: {str(e)}")
+        return output_files
+
+#function infer data types
+def infer_data_types(csv_file):
+    df = pd.read_csv(csv_file, infer_datetime_format=True)
+    data_dictionary = []
+    for col in df.columns:
+         # Basic info
+        col_name = col
+        col_dtype = df[col].dtype  # Pandas-inferred data type
+        
+        # Count of non-null entries
+        non_null_count = df[col].count()
+        # Count of distinct values
+        unique_count = df[col].nunique(dropna=True)
+        
+        # A few sample values (e.g., up to 5 unique non-null samples)
+        # Convert to string for easy display
+        sample_values = df[col].dropna().unique()[:5]
+        
+        # Construct a row for this column
+        col_info = {
+            'Column Name': col_name,
+            'Data Type': str(col_dtype),
+            'Non-null Count': non_null_count,
+            'Unique Values': unique_count,
+            'Sample Values': sample_values
+        }
+        
+        data_dictionary.append(col_info)
+    # create DataFrame with this metadata
+    data_dict_df = pd.DataFrame(data_dictionary)
+    # Print out or save the result
+    print(data_dict_df.to_string(index=False))
     
-def main():
+            
 
     
+def main():
     # Object type (valid values are 'dataset' or 'snapshot')
     object_type = "snapshot"
     
@@ -111,7 +147,13 @@ def main():
     
     # Specify whether to include the schema in the results
     query_items = extract_query_items(object_type, object_id_list, output_path)
-    query_dataset_tables(query_items, output_path)
+    working_csvs = query_dataset_tables(query_items, output_path)
+    # Loop through the CSV files and infer data types
+    for csv_file in working_csvs:
+        print(f"Inferring data types for {csv_file}...")
+        infer_data_types(csv_file)
+    
+    
     
     
 

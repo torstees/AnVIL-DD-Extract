@@ -25,11 +25,6 @@ def search_studies_by_title(
     studies: List[Dict[str, Any]], 
     title_query: str
 ) -> List[Dict[str, Any]]:
-    """
-    Given a list of study objects and a partial title query,
-    return only those studies whose 'Study Title' matches the query
-    (case-insensitive).
-    """
     pattern = re.compile(f".*{re.escape(title_query)}*", re.IGNORECASE)
     matches = []
     for study in studies:

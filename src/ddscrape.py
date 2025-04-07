@@ -137,7 +137,7 @@ def main():
     
     # List objects to extract the schema from
     object_id_list = [
-        "94f79040-68f5-4801-bf41-6f29bc0be8c6"
+        "05a9e369-0011-48d9-ab2e-af334973bdb5"
     ]
     # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"
     

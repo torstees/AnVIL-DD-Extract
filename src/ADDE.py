@@ -8,7 +8,9 @@ from typing import List, Dict, Any
 import pandas as pd
 import argparse
 
-from phs2dd import core
+from phs2dd import core as phs2dd
+
+from ddscrape import main as ddscrape
 
 import pdb
 # from ddscrape import extract_table_schenas
@@ -128,7 +130,7 @@ def main(index_file_path: str, user_query: str):
             f.write(f"species: {r['basic_info']['species']}\n")
             f.write(f"piName: {r['basic_info']['pi_name']}\n")
 
-    core.main(phs_id_list)
+    phs2dd.main(phs_id_list)
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file

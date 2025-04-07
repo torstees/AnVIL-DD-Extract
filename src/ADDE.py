@@ -131,13 +131,14 @@ def main(index_file_path: str, user_query: str):
 
 if __name__ == "__main__":
     # Example usage:
-    duos_index_path = "./AnVIL_All_Studies.json"  # Path to your DUOS index file
+    duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file
+    user_search_string = ""  # Example search string
     parser = argparse.ArgumentParser(description="Search DUOS index for studies.")
     parser.add_argument(
         "--query", 
         type=str, 
-        default=user_search_string, 
-        help="Search string for study title."
+        required=True,
+        help=" use --query Search string for study title."
     )
     args = parser.parse_args()
     user_search_string = args.query

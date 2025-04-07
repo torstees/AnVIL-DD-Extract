@@ -89,6 +89,7 @@ def main(index_file_path: str, user_query: str):
     print(f"Found {len(matching_studies)} matching studies for query '{user_query}'.")
     
     phs_id_list = []
+    object_id_list = []
     results = []
     for st in matching_studies:
         # Basic details
@@ -118,6 +119,7 @@ def main(index_file_path: str, user_query: str):
         filename = re.sub(r'[\s]+', '_', filename) + '.txt'
         # gather phs_ids
         phs_id_list.append(r['basic_info']['phs_id'])
+        object_id_list.append(r['basic_info']['tdr_id'])
         with open(filename, 'w') as f:
             f.write("=== Study ===\n")
             f.write(f"Study Name: {r['basic_info']['study_name']}\n")
@@ -129,8 +131,12 @@ def main(index_file_path: str, user_query: str):
             f.write(f"phenotype: {r['basic_info']['phenotype']}\n")
             f.write(f"species: {r['basic_info']['species']}\n")
             f.write(f"piName: {r['basic_info']['pi_name']}\n")
-
-    phs2dd.main(phs_id_list)
+    try:
+        phs2dd.main(phs_id_list)
+        ddscrape.main(object_id_list)
+    except Exception as e:
+        print(f"Error in phs2dd: {e}")
+        ddscrape.main(object_id_list)
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file

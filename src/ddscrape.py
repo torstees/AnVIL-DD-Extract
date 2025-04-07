@@ -136,10 +136,7 @@ def main():
     object_type = "snapshot"
     
     # List objects to extract the schema from
-    object_id_list = [
-        "05a9e369-0011-48d9-ab2e-af334973bdb5"
-    ]
-    # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"
+ 
     
     # Specify the output GCS path for the results file
     # output_path = "gs://fc-96e29e51-79cf-4213-a2ad-26f84a89aa25/data"
@@ -159,4 +156,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(object_id_list)
+    object_id_list = [
+        "05a9e369-0011-48d9-ab2e-af334973bdb5"
+    ]
+    # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"

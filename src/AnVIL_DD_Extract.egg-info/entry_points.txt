@@ -1,0 +1,2 @@
+[console_scripts]
+phs2dd = ADDE:main

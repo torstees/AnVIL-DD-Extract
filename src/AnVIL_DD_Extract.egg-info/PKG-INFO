@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: AnVIL-DD-Extract
+Version: 0.0.0
+Summary: Extract Data Dictionaries from the AnVIL environment.
+Author-email: Morgan Higby-Flowers <morgan.e.higby-flowers@vumc.org>
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.20.0
+Requires-Dist: pandas>=1.0.0
+Requires-Dist: openpyxl>=3.0.0

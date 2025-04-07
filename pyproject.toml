@@ -24,6 +24,8 @@ dependencies = [
   "openpyxl>=3.0.0"
 ]
 
+dynamic = ["version"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

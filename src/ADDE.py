@@ -8,6 +8,8 @@ from typing import List, Dict, Any
 import pandas as pd
 import argparse
 
+from phs2dd import core
+
 import pdb
 # from ddscrape import extract_table_schenas
 # import datetime
@@ -84,6 +86,7 @@ def main(index_file_path: str, user_query: str):
     matching_studies = search_studies_by_title(all_studies, user_query)
     print(f"Found {len(matching_studies)} matching studies for query '{user_query}'.")
     
+    phs_id_list = []
     results = []
     for st in matching_studies:
         # Basic details
@@ -106,15 +109,13 @@ def main(index_file_path: str, user_query: str):
         
         results.append(study_package)
     
-    # Here, do whatever you like with `results`: 
-    #   - Save to file
-    #   - Perform dictionary comparison
-    #   - Print to screen, etc.
+
     for r in results:
         # Create a filename from study name - replace spaces/special chars with underscores
         filename = re.sub(r'[^\w\s-]', '', r['basic_info']['study_name'])
         filename = re.sub(r'[\s]+', '_', filename) + '.txt'
-        
+        # gather phs_ids
+        phs_id_list.append(r['basic_info']['phs_id'])
         with open(filename, 'w') as f:
             f.write("=== Study ===\n")
             f.write(f"Study Name: {r['basic_info']['study_name']}\n")
@@ -127,8 +128,7 @@ def main(index_file_path: str, user_query: str):
             f.write(f"species: {r['basic_info']['species']}\n")
             f.write(f"piName: {r['basic_info']['pi_name']}\n")
 
-
-
+    core.main(phs_id_list)
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file

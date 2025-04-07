@@ -6,6 +6,7 @@ import json
 import re
 from typing import List, Dict, Any
 import pandas as pd
+import argparse
 
 import pdb
 # from ddscrape import extract_table_schenas
@@ -36,16 +37,7 @@ def search_studies_by_title(
     return matches
 
 def extract_study_details(study_obj: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    From a single DUOS study JSON record, extract relevant fields needed
-    for your dictionary-building process.
-    Example JSON keys to parse:
-      - datasetIdentifier (e.g. 'DUOS-000234')
-      - datasetName (e.g. 'ANVIL_ALS_FTD_DEMENTIA_SEQ_GRU_v1')
-      - dataUse (dict with 'primary' and 'secondary' arrays)
-      - url (TDR snapshot URL, from which we can parse a TDR ID)
-      - study --> description, studyName, phsId, phenotype, species, piName
-    """
+
     # Attempt to parse out TDR snapshot ID from the URL
     # e.g. 'https://data.terra.bio/snapshots/85b0b351-cd0a-4efe-95a4-e39273c42831'
     tdr_url = study_obj.get('url', '')
@@ -129,13 +121,21 @@ def main(index_file_path: str, user_query: str):
         print(f"phenotype: {r['basic_info']['phenotype']}")
         print(f"species: {r['basic_info']['species']}")
         print(f"piName: {r['basic_info']['pi_name']}")
-        # print(f"TDR Dictionary: {r['tdr_dict']}")
-        # print(f"dbGaP Dictionary: {r['dbgap_dict']}\n")
+
 
 
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to your DUOS index file
     user_search_string = "WGS"  # or something the user typed
-    
+    parser = argparse.ArgumentParser(description="Search DUOS index for studies.")
+
+    parser.add_argument(
+        "--query", 
+        type=str, 
+        default=user_search_string, 
+        help="Search string for study title."
+    )
+    args = parser.parse_args()
+    user_search_string = args.query
     main(duos_index_path, user_search_string)

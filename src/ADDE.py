@@ -111,25 +111,28 @@ def main(index_file_path: str, user_query: str):
     #   - Perform dictionary comparison
     #   - Print to screen, etc.
     for r in results:
-        print("=== Study ===")
-        print(f"Study Name: {r['basic_info']['study_name']}")
-        print(f"Dataset Name: {r['basic_info']['dataset_name']}")
-        print(f"TDR ID: {r['basic_info']['tdr_id']}")
-        print(f"dbGaP ID: {r['basic_info']['phs_id']}")
-        print(f"access management: {r['basic_info']['access_management']}")
-        print(f"data use: {r['basic_info']['data_use']}")
-        print(f"phenotype: {r['basic_info']['phenotype']}")
-        print(f"species: {r['basic_info']['species']}")
-        print(f"piName: {r['basic_info']['pi_name']}")
+        # Create a filename from study name - replace spaces/special chars with underscores
+        filename = re.sub(r'[^\w\s-]', '', r['basic_info']['study_name'])
+        filename = re.sub(r'[\s]+', '_', filename) + '.txt'
+        
+        with open(filename, 'w') as f:
+            f.write("=== Study ===\n")
+            f.write(f"Study Name: {r['basic_info']['study_name']}\n")
+            f.write(f"Dataset Name: {r['basic_info']['dataset_name']}\n")
+            f.write(f"TDR ID: {r['basic_info']['tdr_id']}\n")
+            f.write(f"dbGaP ID: {r['basic_info']['phs_id']}\n")
+            f.write(f"access management: {r['basic_info']['access_management']}\n")
+            f.write(f"data use: {r['basic_info']['data_use']}\n")
+            f.write(f"phenotype: {r['basic_info']['phenotype']}\n")
+            f.write(f"species: {r['basic_info']['species']}\n")
+            f.write(f"piName: {r['basic_info']['pi_name']}\n")
 
 
 
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to your DUOS index file
-    user_search_string = "WGS"  # or something the user typed
     parser = argparse.ArgumentParser(description="Search DUOS index for studies.")
-
     parser.add_argument(
         "--query", 
         type=str, 

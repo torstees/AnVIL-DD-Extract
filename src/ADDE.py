@@ -133,9 +133,9 @@ def main(index_file_path: str, user_query: str):
     ddscrape(object_id_list)
     # Find the working directory name based on study name from first result
     if rows:
-        study_dir = rows[0]['study_name'].replace(' ', '_').lower()
+        study_dir = rows[0]['study_name'].lower()
         # Create directory if it doesn't exist
-        if not os.path.exists(study_dir):
+        if not os.path.exists(study_dir + '*'):
             os.makedirs(study_dir)
         # Save CSV in that directory
         filename = os.path.join(study_dir, 'study_results.csv')

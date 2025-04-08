@@ -1,6 +1,7 @@
 """
 resources
 DUOS: https://drive.google.com/file/d/1WUGBQ3nrQOyBCaeeG6uMDNpyd_fG_vKK/view"""
+#!/usr/bin/env python3
 
 import json
 import re

@@ -95,12 +95,12 @@ def query_dataset_tables(query_items, output_path):
                 print(f"Error querying table {table_name}: {str(e)}")
         return output_files
 
-#function infer data types
+# Function infer data types
 def infer_data_types(csv_file):
     df = pd.read_csv(csv_file, infer_datetime_format=True)
     data_dictionary = []
     for col in df.columns:
-         # Basic info
+        # Basic info
         col_name = col
         col_dtype = df[col].dtype  # Pandas-inferred data type
         
@@ -123,14 +123,10 @@ def infer_data_types(csv_file):
         }
         
         data_dictionary.append(col_info)
-    # create DataFrame with this metadata
+    # Create DataFrame with this metadata
     data_dict_df = pd.DataFrame(data_dictionary)
-    # Print out or save the result
-    print(data_dict_df.to_string(index=False))
-    
-            
+    return data_dict_df  # Return the DataFrame instead of printing it
 
-    
 def main(object_id_list):
     # Object type (valid values are 'dataset' or 'snapshot')
     object_type = "snapshot"
@@ -155,12 +151,11 @@ def main(object_id_list):
         dict_file = os.path.join(output_dir, f"{base_name}_data_dict.csv")
         # Infer data types and save to file
         data_dict_df = infer_data_types(csv_file)
-        data_dict_df.to_csv(dict_file, index=False)
-        print(f"Data dictionary saved to {dict_file}")
-    
-    
-    
-
+        if data_dict_df is not None:  # Ensure the DataFrame is valid
+            data_dict_df.to_csv(dict_file, index=False)
+            print(f"Data dictionary saved to {dict_file}")
+        else:
+            print(f"Failed to infer data types for {csv_file}")
 
 if __name__ == "__main__":
     object_id_list = [

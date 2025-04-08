@@ -9,7 +9,7 @@ from google.cloud import bigquery
 import os
 import datetime
 import pandas as pd
-import pdb
+import argparse
 
 #############################################
 ## Functions
@@ -158,8 +158,10 @@ def main(object_id_list):
             print(f"Failed to infer data types for {csv_file}")
 
 if __name__ == "__main__":
-    object_id_list = [
-        "05a9e369-0011-48d9-ab2e-af334973bdb5"
-    ]
+    object_id_list = []
+    parser = argparse.ArgumentParser(description='Process TDR objects.')
+    parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
+
+    args = parser.parse_args()
     main(object_id_list)
-    # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"
+  

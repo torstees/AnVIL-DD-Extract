@@ -112,25 +112,28 @@ def main(index_file_path: str, user_query: str):
         
         results.append(study_package)
     
-
+    #make to csv
+    # Create DataFrame from results
+    rows = []
     for r in results:
-        # Create a filename from study name - replace spaces/special chars with underscores
-        filename = re.sub(r'[^\w\s-]', '', r['basic_info']['study_name'])
-        filename = re.sub(r'[\s]+', '_', filename) + '.txt'
-        # gather phs_ids
+        rows.append({
+            'study_name': r['basic_info']['study_name'],
+            'dataset_name': r['basic_info']['dataset_name'],
+            'tdr_id': r['basic_info']['tdr_id'],
+            'phs_id': r['basic_info']['phs_id'],
+            'access_management': r['basic_info']['access_management'],
+            'data_use': json.dumps(r['basic_info']['data_use']),  # Convert dict to string
+            'phenotype': r['basic_info']['phenotype'],
+            'species': r['basic_info']['species'],
+            'pi_name': r['basic_info']['pi_name']
+        })
         phs_id_list.append(r['basic_info']['phs_id'])
         object_id_list.append(r['basic_info']['tdr_id'])
-        with open(filename, 'w') as f:
-            f.write("=== Study ===\n")
-            f.write(f"Study Name: {r['basic_info']['study_name']}\n")
-            f.write(f"Dataset Name: {r['basic_info']['dataset_name']}\n")
-            f.write(f"TDR ID: {r['basic_info']['tdr_id']}\n")
-            f.write(f"dbGaP ID: {r['basic_info']['phs_id']}\n")
-            f.write(f"access management: {r['basic_info']['access_management']}\n")
-            f.write(f"data use: {r['basic_info']['data_use']}\n")
-            f.write(f"phenotype: {r['basic_info']['phenotype']}\n")
-            f.write(f"species: {r['basic_info']['species']}\n")
-            f.write(f"piName: {r['basic_info']['pi_name']}\n")
+    
+    # Create and save DataFrame
+    df = pd.DataFrame(rows)
+    filename = 'study_results.csv'
+    df.to_csv(filename, index=False)
     try:
         phs2dd.main(phs_id_list)
         ddscrape.main(object_id_list)

@@ -134,7 +134,7 @@ def main(index_file_path: str, user_query: str):
     df.to_csv(filename, index=False)
 
     phs2dd.main(phs_id_list)
-    ddscrape.main(object_id_list)
+    ddscrape(object_id_list)
 
         
         

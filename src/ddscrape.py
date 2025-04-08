@@ -158,10 +158,10 @@ def main(object_id_list):
             print(f"Failed to infer data types for {csv_file}")
 
 if __name__ == "__main__":
-    object_id_list = []
     parser = argparse.ArgumentParser(description='Process TDR objects.')
     parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
 
     args = parser.parse_args()
-    main(object_id_list)
-  
+    object_id_list = args.object_ids  # Use the parsed object IDs
+    main(object_id_list)  # Pass the object_id_list to the main function
+

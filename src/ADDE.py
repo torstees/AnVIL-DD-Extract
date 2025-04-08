@@ -139,7 +139,7 @@ def main(index_file_path: str, user_query: str):
         ddscrape.main(object_id_list)
     except Exception as e:
         print(f"Error in phs2dd: {e}")
-        ddscrape.main(object_id_list)
+        # ddscrape.main(object_id_list)
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file

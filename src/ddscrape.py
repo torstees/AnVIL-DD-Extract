@@ -131,7 +131,7 @@ def infer_data_types(csv_file):
             
 
     
-def main():
+def main(object_id_list):
     # Object type (valid values are 'dataset' or 'snapshot')
     object_type = "snapshot"
     

@@ -32,9 +32,7 @@ def search_studies_by_title(
     pattern = re.compile(f".*{re.escape(title_query)}*", re.IGNORECASE)
     matches = []
     for study in studies:
-        # Adjust key references to match your actual JSON keys
         study_title = study.get("study", {}).get("studyName", "")
-        print(f"Searching for '{title_query}' in '{study_title}'")
         if pattern.search(study_title):
             matches.append(study)
     return matches

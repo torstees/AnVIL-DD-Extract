@@ -148,8 +148,15 @@ def main():
     # Loop through the CSV files and infer data types
     for csv_file in working_csvs:
         print(f"Inferring data types for {csv_file}...")
-        infer_data_types(csv_file)
-    
+        # Get the directory and base filename
+        output_dir = os.path.dirname(csv_file)
+        base_name = os.path.splitext(os.path.basename(csv_file))[0]
+        # Create data dictionary file path
+        dict_file = os.path.join(output_dir, f"{base_name}_data_dict.csv")
+        # Infer data types and save to file
+        data_dict_df = infer_data_types(csv_file)
+        data_dict_df.to_csv(dict_file, index=False)
+        print(f"Data dictionary saved to {dict_file}")
     
     
     

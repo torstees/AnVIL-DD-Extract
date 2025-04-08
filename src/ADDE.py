@@ -11,6 +11,7 @@ from phs2dd import core as phs2dd
 from ddscrape import main as ddscrape
 
 import pdb
+import os
 # from ddscrape import extract_table_schenas
 # import datetime
 
@@ -130,12 +131,18 @@ def main(index_file_path: str, user_query: str):
     
     # Create and save DataFrame
     df = pd.DataFrame(rows)
-    filename = 'study_results.csv'
-    df.to_csv(filename, index=False)
-
     phs2dd.main(phs_id_list)
-    info = ddscrape(object_id_list)
-    print("info,", info)
+    ddscrape(object_id_list)
+    # Find the working directory name based on study name from first result
+    if rows:
+        study_dir = rows[0]['study_name'].replace(' ', '_').lower()
+        # Create directory if it doesn't exist
+        if not os.path.exists(study_dir):
+            os.makedirs(study_dir)
+        # Save CSV in that directory
+        filename = os.path.join(study_dir, 'study_results.csv')
+        df.to_csv(filename, index=False)
+
 
         
         

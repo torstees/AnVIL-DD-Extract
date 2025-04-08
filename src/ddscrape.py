@@ -163,8 +163,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main(object_id_list)
     object_id_list = [
         "05a9e369-0011-48d9-ab2e-af334973bdb5"
     ]
+    main(object_id_list)
     # "aa6b58c2-6eb3-4b4d-9e73-89cbb323ee26"

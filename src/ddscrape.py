@@ -97,7 +97,7 @@ def query_dataset_tables(query_items, output_path):
 
 # Function infer data types
 def infer_data_types(csv_file):
-    df = pd.read_csv(csv_file, infer_datetime_format=True)
+    df = pd.read_csv(csv_file)
     data_dictionary = []
     for col in df.columns:
         # Basic info

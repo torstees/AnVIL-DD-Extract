@@ -53,6 +53,7 @@ def extract_query_items(object_type, object_id_list, output_path):
                     object_schema = object_details["tables"]
                     object_project = object_details["data_project"]
                     table_names = []
+                    tables = object_schema
                     for table in object_schema:
                         table_names.append(table["name"])
                     query_items.append({"table_names": table_names,"dataset_name":object_name,"data_project":object_project})
@@ -61,7 +62,7 @@ def extract_query_items(object_type, object_id_list, output_path):
                 print(f"Error retrieving object from TDR: {str(e)}")
                 print("Continuing to next object.")
                 continue
-        return query_items
+        return {"query_items":query_items, "tables":tables}
                              
     else:
         print("Invalid object_type provided. Please specified 'dataset' or 'snapshot' and try again.")
@@ -96,13 +97,21 @@ def query_dataset_tables(query_items, output_path):
         return output_files
 
 # Function infer data types
-def infer_data_types(csv_file):
+def infer_data_types(csv_file, tables):
     df = pd.read_csv(csv_file)
     data_dictionary = []
+    
+    # Create a mapping of column names to their schema data types from `tables`
+    schema_mapping = {}
+    for table in tables:
+        for column in table["columns"]:
+            schema_mapping[column["name"]] = column["datatype"]
+
     for col in df.columns:
         # Basic info
         col_name = col
         col_dtype = df[col].dtype  # Pandas-inferred data type
+        schema_dtype = schema_mapping.get(col_name, "Unknown")  # Get schema data type or default to "Unknown"
         
         # Count of non-null entries
         non_null_count = df[col].count()
@@ -116,7 +125,8 @@ def infer_data_types(csv_file):
         # Construct a row for this column
         col_info = {
             'Column Name': col_name,
-            'Data Type': str(col_dtype),
+            'Inferred Data Type': str(col_dtype),
+            'Schema Data Type': schema_dtype,
             'Non-null Count': non_null_count,
             'Unique Values': unique_count,
             'Sample Values': sample_values
@@ -139,7 +149,9 @@ def main(object_id_list):
     output_path = "./query_results"
     
     # Specify whether to include the schema in the results
-    query_items = extract_query_items(object_type, object_id_list, output_path)
+    dataset_items = extract_query_items(object_type, object_id_list, output_path)
+    query_items = dataset_items["query_items"]
+    tables = dataset_items["tables"]
     working_csvs = query_dataset_tables(query_items, output_path)
     # Loop through the CSV files and infer data types
     for csv_file in working_csvs:
@@ -150,7 +162,7 @@ def main(object_id_list):
         # Create data dictionary file path
         dict_file = os.path.join(output_dir, f"{base_name}_data_dict.csv")
         # Infer data types and save to file
-        data_dict_df = infer_data_types(csv_file)
+        data_dict_df = infer_data_types(csv_file,tables)
         if data_dict_df is not None:  # Ensure the DataFrame is valid
             data_dict_df.to_csv(dict_file, index=False)
             print(f"Data dictionary saved to {dict_file}")

@@ -156,6 +156,7 @@ def main(object_id_list):
             print(f"Data dictionary saved to {dict_file}")
         else:
             print(f"Failed to infer data types for {csv_file}")
+        return output_dir
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process TDR objects.')

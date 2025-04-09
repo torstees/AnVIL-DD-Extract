@@ -136,11 +136,8 @@ def infer_data_types(csv_file, tables):
         non_null_count = df[col].count()
         # Count of distinct values
         unique_count = df[col].nunique(dropna=True)
-        # Check if the column is categorical
-        if pd.api.types.is_categorical_dtype(df[col]):
-            enumerated_values = df[col].cat.categories.tolist()
-        elif pd.api.types.is_object_dtype(df[col]):
-            # If the column is an object type, we can check for unique values
+        # check if the column has repeated values
+        if unique_count < len(df[col]):
             enumerated_values = df[col].unique().tolist()
         else:
             enumerated_values = None

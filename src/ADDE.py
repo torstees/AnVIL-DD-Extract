@@ -6,9 +6,9 @@ from typing import List, Dict, Any
 import pandas as pd
 import argparse
 
-from phs2dd import core as phs2dd
+from phs2dd import main as phs2dd
 
-from ddscrape import main as ddscrape
+from tdr2dd import main as tdr2dd
 
 import pdb
 import os
@@ -103,8 +103,6 @@ def main(index_file_path: str, user_query: str):
         # Combine everything
         study_package = {
             "basic_info": details,
-            # "tdr_dict": tdr_dict,
-            # "dbgap_dict": dbgap_dict,
         }
         
         results.append(study_package)
@@ -129,8 +127,9 @@ def main(index_file_path: str, user_query: str):
     
     # Create and save DataFrame
     df = pd.DataFrame(rows)
-    phs2dd.main(phs_id_list)
-    ddscrape(object_id_list)
+    ##todo pass directory name so everything is saved in the same directory
+    phs2dd(phs_id_list)
+    tdr2dd(object_id_list)
     # Find the working directory name based on study name from first result
     if rows:
         study_dir = f"query_results/info"

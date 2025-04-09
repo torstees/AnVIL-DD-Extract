@@ -133,7 +133,7 @@ def main(index_file_path: str, user_query: str):
     ddscrape(object_id_list)
     # Find the working directory name based on study name from first result
     if rows:
-        study_dir = f"query_results/{rows[0]['dataset_name'].lower().replace("'", "")}"
+        study_dir = f"query_results/info"
         print(f"Saving results to directory: {study_dir}")
         # Create directory if it doesn't exist
         if not os.path.exists(f"{study_dir}"):

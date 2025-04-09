@@ -108,7 +108,8 @@ def infer_data_types(csv_file, tables):
             schema_mapping[column["name"]] = {
                 "datatype": column["datatype"],
                 "is_array": column["array_of"],
-                "is_required": column["required"]
+                "is_required": column["required"],
+                "description": column["description"]
             }
 
     for col in df.columns:
@@ -119,6 +120,16 @@ def infer_data_types(csv_file, tables):
         schema_dtype = schema_info.get("datatype", "Unknown")
         is_array = schema_info.get("is_array", False)
         is_required = schema_info.get("is_required", False)
+        description = schema_info.get("description", "No description available")
+        type = schema_dtype  # Default to schema data type
+        enumerated_values = schema_info.get("enumerated_values", None)
+        if is_array:
+            if schema_dtype == 'string':
+                type = 'array of strings'
+            elif schema_dtype == 'integer':
+                type = 'array of integers'
+            elif schema_dtype == 'float':
+                type = 'array of floats'
         
         # Count of non-null entries
         non_null_count = df[col].count()
@@ -127,18 +138,20 @@ def infer_data_types(csv_file, tables):
         
         # A few sample values (e.g., up to 5 unique non-null samples)
         # Convert to string for easy display
-        sample_values = df[col].dropna().unique()[:5]
+        # sample_values = df[col].dropna().unique()[:5]
         
         # Construct a row for this column
         col_info = {
-            'Column Name': col_name,
+            'variable_name': col_name,
+            'description': description,
+            'type': type,
+            'enumerated_values': enumerated_values,
             'Inferred Data Type': str(col_dtype),
             'Schema Data Type': schema_dtype,
             'Is Array': is_array,
             'Is Required': is_required,
             'Non-null Count': non_null_count,
-            'Unique Values': unique_count,
-            'Sample Values': sample_values
+            'Unique Values': unique_count
         }
         
         data_dictionary.append(col_info)

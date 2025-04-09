@@ -139,8 +139,8 @@ def infer_data_types(csv_file, tables):
         # Check if unique count is 50% or less of the total non-null count        
         if unique_count < len(df[col]) and not is_array and schema_dtype != 'integer' and unique_count <= non_null_count / 2:
             enumerated_values = df[col].unique().tolist()
-            # formant the enumerated values as 0;item 1;item 2
-            enumerated_values = ";".join([f"{i};{item}" for i, item in enumerate(enumerated_values)])
+            # formant the enumerated values as 0=item; 1=item 2
+            enumerated_values = ";".join([f"{i}={item}" for i, item in enumerate(enumerated_values)])
         else:
             enumerated_values = None
         

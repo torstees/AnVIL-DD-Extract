@@ -109,7 +109,7 @@ def infer_data_types(csv_file, tables):
                 "datatype": column["datatype"],
                 "is_array": column["array_of"],
                 "is_required": column["required"],
-                "description": column["description"]
+                "description": column.get("description", "No description available")  # Use .get() with a default value
             }
 
     for col in df.columns:
@@ -135,10 +135,6 @@ def infer_data_types(csv_file, tables):
         non_null_count = df[col].count()
         # Count of distinct values
         unique_count = df[col].nunique(dropna=True)
-        
-        # A few sample values (e.g., up to 5 unique non-null samples)
-        # Convert to string for easy display
-        # sample_values = df[col].dropna().unique()[:5]
         
         # Construct a row for this column
         col_info = {

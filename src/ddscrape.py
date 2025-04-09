@@ -101,17 +101,24 @@ def infer_data_types(csv_file, tables):
     df = pd.read_csv(csv_file)
     data_dictionary = []
     
-    # Create a mapping of column names to their schema data types from `tables`
+    # Create a mapping of column names to their schema details from `tables`
     schema_mapping = {}
     for table in tables:
         for column in table["columns"]:
-            schema_mapping[column["name"]] = column["datatype"]
+            schema_mapping[column["name"]] = {
+                "datatype": column["datatype"],
+                "is_array": column["array_of"],
+                "is_required": column["required"]
+            }
 
     for col in df.columns:
         # Basic info
         col_name = col
         col_dtype = df[col].dtype  # Pandas-inferred data type
-        schema_dtype = schema_mapping.get(col_name, "Unknown")  # Get schema data type or default to "Unknown"
+        schema_info = schema_mapping.get(col_name, {})
+        schema_dtype = schema_info.get("datatype", "Unknown")
+        is_array = schema_info.get("is_array", False)
+        is_required = schema_info.get("is_required", False)
         
         # Count of non-null entries
         non_null_count = df[col].count()
@@ -127,6 +134,8 @@ def infer_data_types(csv_file, tables):
             'Column Name': col_name,
             'Inferred Data Type': str(col_dtype),
             'Schema Data Type': schema_dtype,
+            'Is Array': is_array,
+            'Is Required': is_required,
             'Non-null Count': non_null_count,
             'Unique Values': unique_count,
             'Sample Values': sample_values

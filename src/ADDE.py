@@ -5,17 +5,9 @@ import re
 from typing import List, Dict, Any
 import pandas as pd
 import argparse
-
 from phs2dd import main as phs2dd
-
 from tdr2dd import main as tdr2dd
-
-import pdb
 import os
-# from ddscrape import extract_table_schenas
-# import datetime
-
-
 
 def load_duos_index(index_file_path: str) -> List[Dict[str, Any]]:
     """

@@ -123,6 +123,7 @@ def infer_data_types(csv_file, tables):
         description = schema_info.get("description", "No description available")
         type = schema_dtype  # Default to schema data type
         enumerated_values = schema_info.get("enumerated_values", None)
+        
         if is_array:
             if schema_dtype == 'string':
                 type = 'array of strings'
@@ -135,6 +136,14 @@ def infer_data_types(csv_file, tables):
         non_null_count = df[col].count()
         # Count of distinct values
         unique_count = df[col].nunique(dropna=True)
+        # Check if the column is categorical
+        if pd.api.types.is_categorical_dtype(df[col]):
+            enumerated_values = df[col].cat.categories.tolist()
+        elif pd.api.types.is_object_dtype(df[col]):
+            # If the column is an object type, we can check for unique values
+            enumerated_values = df[col].unique().tolist()
+        else:
+            enumerated_values = None
         
         # Construct a row for this column
         col_info = {

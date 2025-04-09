@@ -81,7 +81,7 @@ def query_dataset_tables(query_items, output_path):
 
         # Loop through each table name and run a query
         for table_name in table_names:
-            query = f"SELECT * FROM `{data_project}.{dataset_name}.{table_name}` LIMIT 10"
+            query = f"SELECT * FROM `{data_project}.{dataset_name}.{table_name}`"
             try:
                 df = bq_client.query(query).to_dataframe()
                 # Create output directory if it doesn't exist

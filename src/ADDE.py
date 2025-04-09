@@ -5,7 +5,7 @@ import re
 from typing import List, Dict, Any
 import pandas as pd
 import argparse
-from phs2dd import main as phs2dd
+from phs2dd import core as phs2dd
 from tdr2dd import main as tdr2dd
 import os
 
@@ -120,7 +120,7 @@ def main(index_file_path: str, user_query: str):
     # Create and save DataFrame
     df = pd.DataFrame(rows)
     ##todo pass directory name so everything is saved in the same directory
-    phs2dd(phs_id_list)
+    phs2dd.main(phs_id_list)
     tdr2dd(object_id_list)
     # Find the working directory name based on study name from first result
     if rows:

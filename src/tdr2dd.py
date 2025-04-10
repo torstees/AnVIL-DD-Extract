@@ -105,12 +105,12 @@ def infer_data_types(csv_file, tables):
     schema_mapping = {}
     for table in tables:
         for column in table["columns"]:
-            print(f"Column: {column}")
             schema_mapping[column["name"]] = {
                 "datatype": column["datatype"],
                 "is_array": column["array_of"],
                 "is_required": column["required"],
-                "description": column.get("description", "No description available")  # Use .get() with a default value
+                "description": column.get("description", "No description available"),
+
             }
 
     for col in df.columns:
@@ -124,6 +124,9 @@ def infer_data_types(csv_file, tables):
         description = schema_info.get("description", "No description available")
         type = schema_dtype  # Default to schema data type
         enumerated_values = schema_info.get("enumerated_values", None)
+        min = ''
+        max = ''
+        units = ''
         
         if is_array:
             if schema_dtype == 'string':
@@ -144,20 +147,24 @@ def infer_data_types(csv_file, tables):
             enumerated_values = ";".join([f"{i}={item}" for i, item in enumerate(enumerated_values)])
         else:
             enumerated_values = None
+        if type == 'integer' | type == 'float':
+            # Get min and max values
+            if df[col].dtype == 'int64':
+                min = int(df[col].min())
+                max = int(df[col].max())
+            elif df[col].dtype == 'float64':
+                min = float(df[col].min())
+                max = float(df[col].max())
         
         # Construct a row for this column
         col_info = {
             'variable_name': col_name,
             'description': description,
             'type': type,
-            'min': df[col].min() if not is_array else None,
+            'min': min,
+            'max': max,
+            'units': units,
             'enumerated_values': enumerated_values,
-            'Inferred Data Type': str(col_dtype),
-            'Schema Data Type': schema_dtype,
-            'Is Array': is_array,
-            'Is Required': is_required,
-            'Non-null Count': non_null_count,
-            'Unique Values': unique_count
         }
         
         data_dictionary.append(col_info)

@@ -105,6 +105,7 @@ def infer_data_types(csv_file, tables):
     schema_mapping = {}
     for table in tables:
         for column in table["columns"]:
+            print(f"Column: {column}")
             schema_mapping[column["name"]] = {
                 "datatype": column["datatype"],
                 "is_array": column["array_of"],
@@ -149,6 +150,7 @@ def infer_data_types(csv_file, tables):
             'variable_name': col_name,
             'description': description,
             'type': type,
+            'min': df[col].min() if not is_array else None,
             'enumerated_values': enumerated_values,
             'Inferred Data Type': str(col_dtype),
             'Schema Data Type': schema_dtype,

@@ -147,7 +147,7 @@ def infer_data_types(csv_file, tables):
             enumerated_values = ";".join([f"{i}={item}" for i, item in enumerate(enumerated_values)])
         else:
             enumerated_values = None
-        if type == 'integer' | type == 'float':
+        if type == 'integer' or type == 'float':
             # Get min and max values
             if df[col].dtype == 'int64':
                 min = int(df[col].min())

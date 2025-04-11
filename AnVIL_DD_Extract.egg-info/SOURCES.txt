@@ -1,7 +1,0 @@
-pyproject.toml
-src/AnVIL_DD_Extract.egg-info/PKG-INFO
-src/AnVIL_DD_Extract.egg-info/SOURCES.txt
-src/AnVIL_DD_Extract.egg-info/dependency_links.txt
-src/AnVIL_DD_Extract.egg-info/entry_points.txt
-src/AnVIL_DD_Extract.egg-info/requires.txt
-src/AnVIL_DD_Extract.egg-info/top_level.txt

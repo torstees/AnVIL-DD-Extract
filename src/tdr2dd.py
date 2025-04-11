@@ -85,7 +85,7 @@ def query_dataset_tables(query_items, output_path):
             try:
                 df = bq_client.query(query).to_dataframe()
                 # Create output directory if it doesn't exist
-                output_dir = f"{output_path}/{dataset_name}"
+                output_dir = f"{output_path}/orginal_data"
                 os.makedirs(output_dir, exist_ok=True)
                 # Save the DataFrame to a CSV file
                 output_file = f"{output_dir}/{table_name}.csv"

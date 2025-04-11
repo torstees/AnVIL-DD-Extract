@@ -109,7 +109,7 @@ def infer_data_types(csv_file, tables):
                 "datatype": column["datatype"],
                 "is_array": column["array_of"],
                 "is_required": column["required"],
-                "description": column.get("description", "No description available"),
+                "description": column.get("description", None),
 
             }
 
@@ -121,7 +121,7 @@ def infer_data_types(csv_file, tables):
         schema_dtype = schema_info.get("datatype", "Unknown")
         is_array = schema_info.get("is_array", False)
         is_required = schema_info.get("is_required", False)
-        description = schema_info.get("description", "No description available")
+        description = schema_info.get("description", None)
         type = schema_dtype  # Default to schema data type
         enumerated_values = schema_info.get("enumerated_values", None)
         min = ''

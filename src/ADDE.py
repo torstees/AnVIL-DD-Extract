@@ -128,7 +128,7 @@ def main(index_file_path: str, user_query: str):
         df.to_csv(filename, index=False)
         
         # Pass the study directory to phs2dd and tdr2dd
-        phs2dd.main(phs_id_list, study_dir)
+        phs2dd(phs_id_list, study_dir)
         tdr2dd(object_id_list, study_dir)
 
 if __name__ == "__main__":

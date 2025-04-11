@@ -59,6 +59,14 @@ def extract_study_details(study_obj: Dict[str, Any]) -> Dict[str, Any]:
     }
     return details
 
+def sanitize_directory_name(name: str) -> str:
+    """
+    Sanitize the directory name by replacing spaces and special characters.
+    """
+    # Replace spaces with underscores and remove invalid characters
+    sanitized_name = re.sub(r'[^\w\-]', '_', name)
+    return sanitized_name
+
 def main(index_file_path: str, user_query: str):
     """
     Example workflow:
@@ -119,7 +127,8 @@ def main(index_file_path: str, user_query: str):
     if rows:
         # Use the first study name to create the directory
         study_name = rows[0]['study_name']
-        study_dir = f"query_results/{study_name}"
+        sanitized_study_name = sanitize_directory_name(study_name)  # Sanitize the study name
+        study_dir = f"query_results/{sanitized_study_name}"
         print(f"Saving results to directory: {study_dir}")
         # Create directory if it doesn't exist
         os.makedirs(study_dir, exist_ok=True)

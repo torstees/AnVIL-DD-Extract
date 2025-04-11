@@ -118,7 +118,7 @@ def main(index_file_path: str, user_query: str):
     df = pd.DataFrame(rows)
     if rows:
         # Use the first study name to create the directory
-        study_name = rows[0]['study_name'].replace(" ", "_")
+        study_name = rows[0]['study_name']
         study_dir = f"query_results/{study_name}"
         print(f"Saving results to directory: {study_dir}")
         # Create directory if it doesn't exist

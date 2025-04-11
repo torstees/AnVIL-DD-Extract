@@ -30,7 +30,7 @@ AnVIL-DD-Extract is a Python-based tool designed to extract and process study me
 Run the `ADDE.py` script to search for studies by title and extract metadata:
 
 ```bash
-python src/ADDE.py --query "<search-string>"
+python ADDE.py --query "<search-string>"
 ```
 
 - **Arguments**:
@@ -43,17 +43,17 @@ python src/ADDE.py --query "<search-string>"
 
 ## File Structure
 
-- `src/ADDE.py`: Main script for searching studies and extracting metadata.
-- `src/phs2dd.py`: Script for retrieving and converting data dictionaries from dbGaP.
-- `src/tdr2dd.py`: Script for creating data dictionaries from the TDR.
+- `ADDE.py`: Main script for searching studies and extracting metadata.
+- `phs2dd.py`: Script for retrieving and converting data dictionaries from dbGaP.
+- `tdr2dd.py`: Script for creating data dictionaries from the TDR.
 - `requirements.txt`: List of Python dependencies.
-- `src/query_results`: Directory where query results are saved.
+- `query_results`: Directory where query results are saved.
 
 ## Example Workflow
 
 1. Search for studies with a specific title:
    ```bash
-   python src/ADDE.py --query "Cancer"
+   python ADDE.py --query "Cancer"
    ```
 
 ## Dependencies

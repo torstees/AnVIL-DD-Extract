@@ -173,28 +173,19 @@ def infer_data_types(csv_file, tables):
     return data_dict_df  # Return the DataFrame instead of printing it
 
 def main(object_id_list, study_dir):
-    # Object type (valid values are 'dataset' or 'snapshot')
     object_type = "snapshot"
-    
-    # Specify the output path for the results file
-    output_path = study_dir  # Use the passed study directory
-    
-    # Extract query items and query dataset tables
+    output_path = study_dir
     dataset_items = extract_query_items(object_type, object_id_list, output_path)
     query_items = dataset_items["query_items"]
     tables = dataset_items["tables"]
     working_csvs = query_dataset_tables(query_items, output_path)
     
-    # Loop through the CSV files and infer data types
     for csv_file in working_csvs:
         print(f"Inferring data types for {csv_file}...")
-        # Get the base filename
         base_name = os.path.splitext(os.path.basename(csv_file))[0]
-        # Create data dictionary file path
         dict_file = os.path.join(output_path, f"{base_name}_data_dict.csv")
-        # Infer data types and save to file
         data_dict_df = infer_data_types(csv_file, tables)
-        if data_dict_df is not None:  # Ensure the DataFrame is valid
+        if data_dict_df is not None:
             data_dict_df.to_csv(dict_file, index=False)
             print(f"Data dictionary saved to {dict_file}")
         else:
@@ -204,9 +195,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process TDR objects.')
     parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
     parser.add_argument('--study_dir', required=True, help='Directory to save the study files')
-
     args = parser.parse_args()
-    object_id_list = args.object_ids  # Use the parsed object IDs
-    study_dir = args.study_dir  # Use the parsed study directory
-    main(object_id_list, study_dir)  # Pass the object_id_list and study_dir to the main function
+    object_id_list = args.object_ids
+    study_dir = args.study_dir
+    main(object_id_list, study_dir)
 

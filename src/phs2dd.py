@@ -36,7 +36,6 @@ def get_lastest_version(study_url, phs_id):
 def get_data_dict_str(pheno_var_sums_url):
         response = requests.get(pheno_var_sums_url)
         
-        # Parse the response text to find the data dict
         soup = BeautifulSoup(response.text, 'html.parser')
         links = soup.find_all('a')
         data_dicts = [link.get('href') for link in links if link.get('href').endswith('data_dict.xml')]
@@ -48,10 +47,8 @@ def get_data_dict_str(pheno_var_sums_url):
 
 def convert_xml_urls_to_csv(xml_urls, study_dir):
     try:
-        # Define the folder name for saving CSVs
         output_folder = os.path.join(study_dir, "dbgap_csvs")
         
-        # Create the folder if it doesn't exist
         if not os.path.exists(output_folder):
             os.makedirs(output_folder)
 
@@ -68,7 +65,6 @@ def convert_xml_urls_to_csv(xml_urls, study_dir):
 
             with open(csv_name, mode="w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                # Write header row
                 writer.writerow([
                     "variable_name", 
                     "description", 
@@ -90,7 +86,6 @@ def convert_xml_urls_to_csv(xml_urls, study_dir):
                     logical_min = var.findtext("logical_min", default="")
                     logical_max = var.findtext("logical_max", default="")
                     
-                    # Collect coded values from any <value> children
                     coded_value_list = []
                     for val in var.findall("value"):
                         code = val.get("code", "")
@@ -120,12 +115,9 @@ def convert_xml_urls_to_csv(xml_urls, study_dir):
             
         csv_names = [os.path.basename(url).replace('.xml', '.csv') for url in xml_urls]
         if csv_names:
-            # Extract the part before '.data_dict' from the first filename
             prefix = csv_names[0].split('.data_dict')[0] if '.data_dict' in csv_names[0] else ''
             if prefix:
-                # Create new folder name
                 new_folder = os.path.join(study_dir, prefix)
-                # Rename the folder
                 if os.path.exists(output_folder):
                     os.rename(output_folder, new_folder)
                     logging.info(f"Renamed output folder to: {new_folder}")
@@ -136,14 +128,11 @@ def convert_xml_urls_to_csv(xml_urls, study_dir):
 
 def main(phs_ids, study_dir):
     configure_logging(study_dir)
-    
     for phs_id in phs_ids:
         study_url = f"https://ftp.ncbi.nlm.nih.gov/dbgap/studies/{phs_id}/"
         latest_version = get_lastest_version(study_url, phs_id)
-        
         if latest_version is None:
             print("No latest version found for PHS ID: {phs_id}")     
-        
         pheno_var_sums_url = f"{study_url}{latest_version}/pheno_variable_summaries/"
         data_dict_urls = []
         for data_dict_url in get_data_dict_str(pheno_var_sums_url):

@@ -86,11 +86,9 @@ def main(index_file_path: str, user_query: str):
 
         # TDR ID
         tdr_id = details["tdr_id"]
-        # tdr_dict = build_tdr_data_dictionary(tdr_id) if tdr_id else None
         
-        # If we have a phsID, build the dbGaP dictionary
+        # phsID
         phs_id = details["phs_id"]
-        # dbgap_dict = build_dbgap_data_dictionary(phs_id) if phs_id else None
         
         # Combine everything
         study_package = {
@@ -99,8 +97,7 @@ def main(index_file_path: str, user_query: str):
         
         results.append(study_package)
     
-    #make to csv
-    # Create DataFrame from results
+    # Create rows for DataFrame and collect IDs
     rows = []
     for r in results:
         rows.append({
@@ -119,23 +116,21 @@ def main(index_file_path: str, user_query: str):
     
     # Create and save DataFrame
     df = pd.DataFrame(rows)
-    ##todo pass directory name so everything is saved in the same directory
-    phs2dd.main(phs_id_list)
-    tdr2dd(object_id_list)
-    # Find the working directory name based on study name from first result
     if rows:
-        study_dir = f"query_results/info"
+        # Use the first study name to create the directory
+        study_name = rows[0]['study_name'].replace(" ", "_")
+        study_dir = f"query_results/{study_name}"
         print(f"Saving results to directory: {study_dir}")
         # Create directory if it doesn't exist
-        if not os.path.exists(f"{study_dir}"):
-            os.makedirs(study_dir)
+        os.makedirs(study_dir, exist_ok=True)
         # Save CSV in that directory
         filename = os.path.join(study_dir, 'study_results.csv')
         df.to_csv(filename, index=False)
-
-
         
-        
+        # Pass the study directory to phs2dd and tdr2dd
+        phs2dd.main(phs_id_list, study_dir)
+        tdr2dd(object_id_list, study_dir)
+
 if __name__ == "__main__":
     # Example usage:
     duos_index_path = "./AnVIL_All_Studies.json"  # Path to DUOS index file

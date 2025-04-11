@@ -55,7 +55,7 @@ def sanitize_directory_name(name: str) -> str:
     sanitized_name = re.sub(r'[^\w\-]', '_', name)
     return sanitized_name
 
-def main(index_file_path: str, user_query: str):
+def main(index_file_path: str, user_query: str,enumeration_threshold):
     all_studies = load_duos_index(index_file_path)
     matching_studies = search_studies_by_title(all_studies, user_query)
     print(f"Found {len(matching_studies)} matching studies for query '{user_query}'.")
@@ -96,7 +96,7 @@ def main(index_file_path: str, user_query: str):
         filename = os.path.join(study_dir, 'study_results.csv')
         df.to_csv(filename, index=False)
         phs2dd(phs_id_list, study_dir)
-        tdr2dd(object_id_list, study_dir)
+        tdr2dd(object_id_list, study_dir, enumeration_threshold)
 
 if __name__ == "__main__":
     duos_index_path = "./AnVIL_All_Studies.json"
@@ -108,6 +108,8 @@ if __name__ == "__main__":
         required=True,
         help=" use --query Search string for study title."
     )
+    parser.add_argument('--enumeration_threshold', required=False, help='percentage of unique values to be considered enumerated')
     args = parser.parse_args()
     user_search_string = args.query
-    main(duos_index_path, user_search_string)
+    enumeration_threshold = args.enumeration_threshold or 30
+    main(duos_index_path, user_search_string,enumeration_threshold)

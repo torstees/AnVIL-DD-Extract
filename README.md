@@ -41,7 +41,7 @@ python ADDE.py --query "<search-string>"
 
 
 
-## File Structure
+## Files
 
 - `ADDE.py`: Main script for searching studies and extracting metadata.
 - `phs2dd.py`: Script for retrieving and converting data dictionaries from dbGaP.

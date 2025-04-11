@@ -142,8 +142,7 @@ def infer_data_types(csv_file, tables, enumeration_threshold):
         unique_count = df[col].nunique(dropna=True)
         # Check if unique count is 50% or less of the total non-null count        
         if unique_count < len(df[col]) and not is_array and type == 'string' and unique_count <= non_null_count * (enumeration_threshold / 100):
-            enumerated_values = df[col].unique().tolist()
-            # formant the enumerated values as 0=item; 1=item 2
+            enumerated_values = df[col].unique()
             enumerated_values = ";".join([f"{item}" for item in enumerate(enumerated_values)])
         elif type == 'boolean':
             enumerated_values = 'T=True;F=False'

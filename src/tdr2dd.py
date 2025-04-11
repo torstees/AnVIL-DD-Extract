@@ -85,8 +85,8 @@ def query_dataset_tables(query_items, output_path):
             try:
                 df = bq_client.query(query).to_dataframe()
                 # Create output directory if it doesn't exist
-                output_dir = f"{output_path}/{dataset_name}"
-                os.makedirs(output_dir, exist_ok=True)
+                output_dir = f"{dataset_name}"
+                # os.makedirs(output_dir, exist_ok=True)
                 # Save the DataFrame to a CSV file
                 output_file = f"{output_dir}/{table_name}.csv"
                 df.to_csv(output_file, index=False)
@@ -191,7 +191,7 @@ def main(object_id_list, study_dir):
         # Get the base filename
         base_name = os.path.splitext(os.path.basename(csv_file))[0]
         # Create data dictionary file path
-        dict_file =  f"{base_name}_data_dict.csv"
+        dict_file = os.path.join(output_path, f"{base_name}_data_dict.csv")
         # Infer data types and save to file
         data_dict_df = infer_data_types(csv_file, tables)
         if data_dict_df is not None:  # Ensure the DataFrame is valid

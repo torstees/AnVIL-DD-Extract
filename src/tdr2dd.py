@@ -191,7 +191,7 @@ def main(object_id_list, study_dir):
         # Get the base filename
         base_name = os.path.splitext(os.path.basename(csv_file))[0]
         # Create data dictionary file path
-        dict_file = os.path.join(output_path, f"{base_name}_data_dict.csv")
+        dict_file =  f"{base_name}_data_dict.csv"
         # Infer data types and save to file
         data_dict_df = infer_data_types(csv_file, tables)
         if data_dict_df is not None:  # Ensure the DataFrame is valid

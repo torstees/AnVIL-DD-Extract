@@ -1,4 +1,3 @@
-git+https://github.com/mhigbyflowers/phs2dd.git@main#egg=phs2dd
 requests
 pandas
 openpyxl

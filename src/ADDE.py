@@ -5,7 +5,7 @@ import re
 from typing import List, Dict, Any
 import pandas as pd
 import argparse
-from phs2dd import core as phs2dd
+from phs2dd import main as phs2dd
 from tdr2dd import main as tdr2dd
 import os
 

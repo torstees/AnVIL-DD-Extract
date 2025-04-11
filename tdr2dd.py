@@ -97,7 +97,7 @@ def query_dataset_tables(query_items, output_path):
         return output_files
 
 # Function infer data types
-def infer_data_types(csv_file, tables):
+def infer_data_types(csv_file, tables, enumeration_threshold):
     df = pd.read_csv(csv_file)
     data_dictionary = []
     
@@ -141,10 +141,10 @@ def infer_data_types(csv_file, tables):
         # Count of distinct values
         unique_count = df[col].nunique(dropna=True)
         # Check if unique count is 50% or less of the total non-null count        
-        if unique_count < len(df[col]) and not is_array and type == 'string' and unique_count <= non_null_count / 2:
+        if unique_count < len(df[col]) and not is_array and type == 'string' and unique_count <= non_null_count * (enumeration_threshold / 100):
             enumerated_values = df[col].unique().tolist()
             # formant the enumerated values as 0=item; 1=item 2
-            enumerated_values = ";".join([f"{i}={item}" for i, item in enumerate(enumerated_values)])
+            enumerated_values = ";".join([f"{item}" for item in enumerate(enumerated_values)])
         elif type == 'boolean':
             enumerated_values = 'T=True;F=False'
         else:
@@ -174,7 +174,7 @@ def infer_data_types(csv_file, tables):
     data_dict_df = pd.DataFrame(data_dictionary)
     return data_dict_df  # Return the DataFrame instead of printing it
 
-def main(object_id_list, study_dir):
+def main(object_id_list, study_dir, enumeration_threshold):
     object_type = "snapshot"
     output_path = study_dir
     dataset_items = extract_query_items(object_type, object_id_list, output_path)
@@ -186,7 +186,7 @@ def main(object_id_list, study_dir):
         print(f"Inferring data types for {csv_file}...")
         base_name = os.path.splitext(os.path.basename(csv_file))[0]
         dict_file = os.path.join(output_path, f"{base_name}_data_dict.csv")
-        data_dict_df = infer_data_types(csv_file, tables)
+        data_dict_df = infer_data_types(csv_file, tables, enumeration_threshold)
         if data_dict_df is not None:
             data_dict_df.to_csv(dict_file, index=False)
             print(f"Data dictionary saved to {dict_file}")
@@ -197,8 +197,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process TDR objects.')
     parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
     parser.add_argument('--study_dir', required=True, help='Directory to save the study files')
+    parser.add_argument('--enumeration_threshold', required=True, help='percentage of unique values to be considered enumerated')
     args = parser.parse_args()
     object_id_list = args.object_ids
     study_dir = args.study_dir
-    main(object_id_list, study_dir)
+    enumeration_threshold = args.enumeration_threshold or 30
+    main(object_id_list, study_dir, enumeration_threshold)
 

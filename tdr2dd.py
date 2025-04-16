@@ -85,7 +85,7 @@ def query_dataset_tables(query_items, output_path):
             try:
                 df = bq_client.query(query).to_dataframe()
                 # Create output directory if it doesn't exist
-                output_dir = f"{output_path}/orginal_data"
+                output_dir = f"{output_path}/{dataset_name}/orginal_data"
                 os.makedirs(output_dir, exist_ok=True)
                 # Save the DataFrame to a CSV file
                 output_file = f"{output_dir}/{table_name}.csv"
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process TDR objects.')
     parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
     parser.add_argument('--study_dir', required=True, help='Directory to save the study files')
-    parser.add_argument('--enumeration_threshold', required=True, help='percentage of unique values to be considered enumerated')
+    parser.add_argument('--enumeration_threshold', required=True, type=int, help='percentage (integer, so x 100) of unique values to be considered enumerated')
     args = parser.parse_args()
     object_id_list = args.object_ids
     study_dir = args.study_dir

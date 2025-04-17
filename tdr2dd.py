@@ -11,6 +11,14 @@ import datetime
 import pandas as pd
 import argparse
 
+import pdb
+from rich import print
+
+MAX_SNAPSHOT_COUNT=1000
+
+def getAttrs(object):
+   return filter(lambda m: callable(getattr(object, m)), dir(object))
+
 #############################################
 ## Functions
 #############################################
@@ -39,6 +47,22 @@ def extract_query_items(object_type, object_id_list, output_path):
             api_client = refresh_tdr_api_client()
             datasets_api = data_repo_client.DatasetsApi(api_client=api_client)
             snapshots_api = data_repo_client.SnapshotsApi(api_client=api_client)
+
+            print(f"Inside function with snapshots api")
+            fns = dir(snapshots_api)
+            print(fns)
+
+            pdb.set_trace()
+            print(f"Enumerate Snapshots")
+            print(getAttrs(snapshots_api.enumerate_snapshots))
+
+            ss_enumerations  = snapshots_api.enumerate_snapshots(limit=MAX_SNAPSHOT_COUNT, filter="CMG").to_dict()
+            ss_items = ss_enumerations['items']
+
+            for item in ss_items:
+                print(f"* {item['id']} - {item['name']} - {item['description']} - {item.get('phs_id')}")
+
+            pdb.set_trace()
 
             # Retrieve dataset details
             print(f"Processing {object_type} = '{object_id}'...")

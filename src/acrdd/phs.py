@@ -126,6 +126,7 @@ def convert_xml_urls_to_csv(xml_urls, study_dir):
         logging.error(f"An error occurred: {e}")
         print(f"An error occurred: {e}")
 
+
 def main(phs_ids, study_dir):
     configure_logging(study_dir)
     for phs_id in phs_ids:

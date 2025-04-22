@@ -11,9 +11,96 @@ import datetime
 import pandas as pd
 import argparse
 
+"""
+The purpose of this script will be to extract all TDR snapshots into the 
+map-dragon data-dictionary format. The purpose for this is two-fold: 
+    1) to enable loading of data-dictionaries into MD for mapping. 
+    2) to host someplace as an informational resource for researchers
+
+Multiple sources of truth: 
+    1) Terra Data Repository (TDR) - This is the database/api that 
+       houses the data as snapshots. 
+    2) dbGAP - This is the original source for sharing research data funded
+       by the NIH. There is a lot of variation in terms of completeness
+       in this data
+    3) Data Use Oversight System (DUOS) - This is where the official consent 
+       details are found. We have a single JSON file that contains the data
+       that is currently available to us. 
+
+Issues: 
+* There is some degree of human involvement for prepping these for use in 
+map-dragon. To better serve the data team, we will extract data in 2 forms:
+First, enumerations will be identified based on a fractional unique value ratio
+(and possibly an integer minimum distinct value). This will be the "official"
+data dictionary. For mapping, we'll set the ratio to 100% and let the data
+team delete the rows that aren't appropriate for mapping. 
+
+
+Output:
+We will segregate the data that is in DUOS from the data in TDR Only. I'm 
+imagining the output directories will look something like: 
+
+duos-output/[snapshat title]/tdr-all/[various DD files]
+duos-output/[snapshat title]/tdr-enums/[various DD files]
+duos-output/[snapshat title]/dbGAP/[various DD files]
+tdr-only-output/[snapshat title]/tdr-all/[various DD files]
+tdr-only-output/[snapshat title]/tdr-enums/[various DD files]
+tdr-only-output/[snapshat title]/dbGAP/[various DD files]
+
+TODO: 
+
+1) Extract all snapshot details using "get_snapshot_ids" function with an 
+   empty string as the search value. We should pull them in chunks, maybe
+   250 at a time or something. We want to store these in a single dictionary
+   keyed by the study "name". 
+2) Traverse the DUOS file and update the Snapshot Details with consent 
+   information
+3) for each snapshot pulled from #1:
+    1) if there is a phsID, generate a phs based data-dictionary (see phs.py)
+    2) generate the TDR based data dictionary (thresholds 100, ??)
+
+At a later date, we will extract summary information (counts for different 
+values, etc)
+
+"""
+
 #############################################
 ## Functions
 #############################################
+
+
+class SnapshotDetail:
+    def __init__(self, item):
+        self.id = item['id']
+        self.name = item['name']
+        self.description = item['description']
+        self.phs_id = item['phsId']
+        self.duos_id = item['duosId']
+        self.in_duos = False 
+        self.data_use = None 
+    
+    def add_duos(self, duosId, dataUse):
+        """Set the duos ID """
+        self.duos_id = duosId 
+        self.in_duos = True 
+        self.data_use = dataUse 
+
+def get_snapshot_ids(api, search_value, offset=0, limit=2000):
+    """Return a list of all snapshot details that match search_value"""
+    snapshot_details = {}
+
+    ss_enums = api.enumerate_snapshots(offset=offset, 
+                                       limit=limit, 
+                                       filter=search_value).to_dict()
+    for item in ss_enums['items']:
+        ss = SnapshotDetail(item)
+
+        assert(ss.name not in snapshot_details)
+        snapshot_details[ss.name] = ss 
+
+    return snapshot_details
+    
+
 
 # Function to refresh TDR API client
 def refresh_tdr_api_client():
@@ -194,12 +281,13 @@ def main(object_id_list, study_dir, enumeration_threshold):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process TDR objects.')
-    parser.add_argument('--object_ids', nargs='+', required=True, help='List of object IDs to process')
+    parser.add_argument('--object_id', type=str,  help='Object ID to be extracted (may appear multiple times)')
+    parser.add_argument('--filter', type=str, help='String to match on for snapshots to be extracted')
     parser.add_argument('--study_dir', required=True, help='Directory to save the study files')
-    parser.add_argument('--enumeration_threshold', required=True, type=int, help='percentage (integer, so x 100) of unique values to be considered enumerated')
+    parser.add_argument('--enumeration_threshold',default=30, type=int, help='percentage (integer, so x 100) of unique values to be considered enumerated')
     args = parser.parse_args()
     object_id_list = args.object_ids
     study_dir = args.study_dir
-    enumeration_threshold = args.enumeration_threshold or 30
+    enumeration_threshold = args.enumeration_threshold
     main(object_id_list, study_dir, enumeration_threshold)
 
